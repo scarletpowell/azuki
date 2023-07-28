@@ -24,6 +24,11 @@ include(
     "graphs:eacs",
     "graphs:script-runner",
     "graphs:verification-runner",
+    "irr:eacs",
+    "irr:adapter-api",
+    "irr:adapter-irr",
+    "irr:dsl",
+    "irr:adapter-declaration",
 )
 includeBuild("build-conventions")
 includeBuild("vdm-animation")

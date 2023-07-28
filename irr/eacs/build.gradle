@@ -1,0 +1,42 @@
+plugins {
+    id 'azuki.kotlin-conventions'
+}
+
+repositories {
+    // required for jung snapshot
+    maven { url "https://jitpack.io" }
+}
+
+configurations {
+    irr.extendsFrom testRuntime
+}
+
+dependencies {
+    api project(":irr:dsl")
+    irr project(":irr:adapter-irr")
+    testRuntimeOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.0'
+}
+
+task irrClasspathJar(type: Jar) {
+    dependsOn configurations.irr
+    archiveBaseName = 'IRR'
+    manifest {
+        attributes(
+            "Class-Path": configurations.irr.collect { it.absolutePath }.join(' '))
+    }
+}
+
+test {
+    dependsOn irrClasspathJar
+
+    def instanceJars = [
+        irrClasspathJar.archiveFile.get().asFile.absolutePath,
+    ]
+    systemProperties = [
+        retainOvertureTempFiles                                     : findProperty("retainOvertureTempFiles") ?: true,
+        "com.anaplan.engineering.azuki.implementation.instance.jars": instanceJars.join(","),
+        "com.anaplan.engineering.azuki.implementation.includes"     : findProperty("impl.includes"),
+        "com.anaplan.engineering.azuki.implementation.excludes"     : findProperty("impl.excludes"),
+    ]
+}
+
