@@ -11,11 +11,11 @@ import com.anaplan.engineering.azuki.irr.adapter.declaration.toDeclarableAction
 import com.anaplan.engineering.azuki.irr.adapter.irr.action.IRRAction
 import com.anaplan.engineering.azuki.irr.adapter.irr.action.IRRActionFactory
 import com.anaplan.engineering.azuki.irr.adapter.irr.action.toIRRAction
-import com.anaplan.engineering.azuki.irr.adapter.irr.check.IRRCheck
-import com.anaplan.engineering.azuki.irr.adapter.irr.check.IRRCheckFactory
-import com.anaplan.engineering.azuki.irr.adapter.irr.check.toIRRCheck
-import com.anaplan.engineering.azuki.irr.adapter.irr.declaration.IRRDeclarationBuilder
-import com.anaplan.engineering.azuki.irr.adapter.irr.declaration.IRRDeclarationBuilderFactory
+import com.anaplan.engineering.azuki.irr.adapter.irr.check.IrrPoiCheck
+import com.anaplan.engineering.azuki.irr.adapter.irr.check.IrrPoiCheckFactory
+import com.anaplan.engineering.azuki.irr.adapter.irr.check.toIrrPoiCheck
+import com.anaplan.engineering.azuki.irr.adapter.irr.declaration.IrrPoiDeclarationBuilder
+import com.anaplan.engineering.azuki.irr.adapter.irr.declaration.IrrPoiDeclarationBuilderFactory
 import com.anaplan.engineering.azuki.irr.adapter.irr.execution.ExecutionEnvironment
 import org.slf4j.LoggerFactory
 
@@ -30,12 +30,12 @@ class IRRSystemFactory : SystemFactory<
         return IRRSystem(
             systemDefinition.declarations.map(toDeclarableAction),
             systemDefinition.actions.map(toIRRAction),
-            systemDefinition.checks.map(toIRRCheck),
+            systemDefinition.checks.map(toIrrPoiCheck),
         )
     }
 
     override val actionFactory = IRRActionFactory()
-    override val checkFactory = IRRCheckFactory()
+    override val checkFactory = IrrPoiCheckFactory()
     override val queryFactory = NoQueryFactory
     override val actionGeneratorFactory = NoActionGeneratorFactory
 
@@ -44,8 +44,8 @@ class IRRSystemFactory : SystemFactory<
 data class IRRSystem(
     val declarableActions: List<DeclarableAction>,
     val buildActions: List<IRRAction>,
-    val checks: List<IRRCheck>
-) : System<IRRFactory, IrrCheckFactory> {
+    val checks: List<IrrPoiCheck>
+) : System<IrrActionFactory, IrrCheckFactory> {
 
     override val supportedActions = if (checks.isNotEmpty()) {
         setOf(System.SystemAction.Verify)
@@ -89,7 +89,7 @@ data class IRRSystem(
     }
 
     private fun <D : Declaration> declarationBuilder(declaration: D) =
-        declarationBuilderFactory.createBuilder<D, IRRDeclarationBuilder<D>>(declaration)
+        declarationBuilderFactory.createBuilder<D, IrrPoiDeclarationBuilder<D>>(declaration)
 
 
     override fun generateReport(name: String) = throw UnsupportedOperationException()
@@ -99,7 +99,7 @@ data class IRRSystem(
     override fun generateActions() = throw UnsupportedOperationException()
 
     companion object {
-        private val declarationBuilderFactory = DeclarationBuilderFactory(IRRDeclarationBuilderFactory::class.java)
+        private val declarationBuilderFactory = DeclarationBuilderFactory(IrrPoiDeclarationBuilderFactory::class.java)
 
         private val Log = LoggerFactory.getLogger(IRRSystemFactory::class.java)
     }

@@ -9,11 +9,16 @@ class IrrPoiCheckFactory: IrrCheckFactory {
     override fun systemValid() = IrrSystemValidCheck
 }
 
-object IrrSystemValidCheck : IrrCheck {
+object IrrSystemValidCheck : IrrPoiCheck {
     override val behavior = -1
     override fun check(env: ExecutionEnvironment) = true
 }
 
-interface IrrCheck : Check {
+interface IrrPoiCheck : Check {
     fun check(env: ExecutionEnvironment) : Boolean
+}
+
+val toIrrPoiCheck: (Check) -> IrrPoiCheck = {
+    @Suppress("UNCHECKED_CAST")
+    it as? IrrPoiCheck ?: throw IllegalArgumentException("Invalid check: $it")
 }

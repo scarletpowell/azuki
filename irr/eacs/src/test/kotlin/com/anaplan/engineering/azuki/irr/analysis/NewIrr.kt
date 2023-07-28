@@ -7,7 +7,7 @@ import com.anaplan.engineering.azuki.irr.cashFlowA
 class NewIrr: IrrScenario() {
 
     @AnalysisScenario
-    fun newIrrIsOkay() {
+    fun newCashFlowSeriesIsOkay() {
         given {
             cashFlowSeries(cashFlowA)
         }
@@ -22,7 +22,7 @@ class NewIrr: IrrScenario() {
             cashFlowSeries(cashFlowA, 1.0)
         }
         then {
-            hasIrrValue(cashFlowA, 0.0)
+            everythingIsOk()
         }
     }
 }

@@ -9,8 +9,9 @@ class ExecutionEnvironment {
     fun act(name: String, action: List<Double>.() -> Unit) =
         cashFlowLists[name]?.action() ?: throw ExecutionException("No such list $name")
 
-    fun addIrr(name: String, value: Double) {
-
+    fun addCashFlowSeries(name: String, values: List<Double>) {
+        if (cashFlowLists.containsKey(name)) throw  ExecutionException("Cash Flow Series $name already exists")
+        cashFlowLists[name] = values
     }
 }
 

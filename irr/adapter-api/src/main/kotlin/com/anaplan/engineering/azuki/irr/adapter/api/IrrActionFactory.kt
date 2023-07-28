@@ -3,7 +3,7 @@ package com.anaplan.engineering.azuki.irr.adapter.api
 import com.anaplan.engineering.azuki.core.system.Action
 import com.anaplan.engineering.azuki.core.system.ActionFactory
 import com.anaplan.engineering.azuki.core.system.UnsupportedAction
-import com.sun.org.slf4j.internal.LoggerFactory
+import org.slf4j.LoggerFactory
 
 interface IrrActionFactory: ActionFactory {
 

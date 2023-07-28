@@ -9,6 +9,6 @@ abstract class CreateCashFlowSeriesDeclarableAction(
 ): CreateCashFlowSeriesBehaviour(), DeclarableAction {
 
     override fun declare(builder: DeclarationBuilder) {
-        builder.declareIrr(income)
+        builder.declareCashFlowSeries(cashFlowSeriesName)
     }
 }

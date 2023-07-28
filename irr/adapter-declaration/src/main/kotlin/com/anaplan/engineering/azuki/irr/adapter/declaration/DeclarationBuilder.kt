@@ -1,6 +1,7 @@
 package com.anaplan.engineering.azuki.irr.adapter.declaration
 
 import com.anaplan.engineering.azuki.declaration.Declaration
+import com.anaplan.engineering.azuki.irr.adapter.declaration.declaration.CashFlowSeriesDeclaration
 import com.anaplan.engineering.azuki.irr.adapter.declaration.declaration.IrrDeclaration
 
 class DeclarationBuilder(private val declarationActions: List<DeclarableAction>) {
@@ -22,9 +23,9 @@ class DeclarationBuilder(private val declarationActions: List<DeclarableAction>)
         if (!declarations.containsKey(name)) throw MissingDeclarationException(name)
     }
 
-    fun declareGraph(cashFlowSeriesName: String, cashflow: Double) {
+    fun declareCashFlowSeries(cashFlowSeriesName: String) {
         checkForDuplicate(cashFlowSeriesName)
-        declarations[cashFlowSeriesName] = IrrDeclaration(cashFlowSeriesName, cashflow, standalone = true)
+        declarations[cashFlowSeriesName] = CashFlowSeriesDeclaration(cashFlowSeriesName, standalone = true)
     }
 }
 

@@ -4,15 +4,15 @@ import com.anaplan.engineering.azuki.irr.adapter.declaration.declaration.IrrDecl
 import com.anaplan.engineering.azuki.irr.adapter.irr.execution.ExecutionEnvironment
 
 
-class CreateCashFlowSeriesDeclarableBuilderFactory : IRRDeclarationBuilderFactory<IrrDeclaration> {
+class CreateIrrDeclarationBuilderFactory : IrrPoiDeclarationBuilderFactory<IrrDeclaration> {
 
     override val declarationClass = IrrDeclaration::class.java
 
-    override fun create(declaration: IrrDeclaration): IRRDeclarationBuilder<IrrDeclaration> =
+    override fun create(declaration: IrrDeclaration): IrrPoiDeclarationBuilder<IrrDeclaration> =
         IrrDeclarationBuilder(declaration)
 
     private class IrrDeclarationBuilder(declaration: IrrDeclaration) :
-        IRRDeclarationBuilder<IrrDeclaration>(declaration) {
+        IrrPoiDeclarationBuilder<IrrDeclaration>(declaration) {
 
         override fun build(env: ExecutionEnvironment) {
             // - fetch cash flow list from env (name in declaration)
@@ -20,7 +20,7 @@ class CreateCashFlowSeriesDeclarableBuilderFactory : IRRDeclarationBuilderFactor
             // - (alternative) do without an explicit cash flow list and just store the values in the IRR declaration
             // - calculate IRR of that list of values using library
             // - store calculated IRR value in env
-            env.addIrr(declaration.name,  TODO())
+            TODO()
         }
 
     }
