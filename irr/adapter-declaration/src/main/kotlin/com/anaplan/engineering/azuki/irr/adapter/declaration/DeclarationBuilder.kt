@@ -27,6 +27,14 @@ class DeclarationBuilder(private val declarationActions: List<DeclarableAction>)
         checkForDuplicate(cashFlowSeriesName)
         declarations[cashFlowSeriesName] = CashFlowSeriesDeclaration(cashFlowSeriesName, standalone = true)
     }
+
+    fun addToEnd(cashFlowSeriesName: String, value: Double) {
+        val list = getDeclaration<>(cashFlowSeriesName)
+        declarations[cashFlowSeriesName] = list.copy()
+            entities = list.entities + entity,
+            properties = list.properties + (SystemObject.Property.Name to nameProperty)
+        )
+    }
 }
 
 class DuplicateDeclarationException(def: String) : IllegalArgumentException("$def is already defined")
