@@ -29,10 +29,9 @@ class DeclarationBuilder(private val declarationActions: List<DeclarableAction>)
     }
 
     fun addToEnd(cashFlowSeriesName: String, value: Double) {
-        val list = getDeclaration<>(cashFlowSeriesName)
-        declarations[cashFlowSeriesName] = list.copy()
-            entities = list.entities + entity,
-            properties = list.properties + (SystemObject.Property.Name to nameProperty)
+        val list = getDeclaration<CashFlowSeriesDeclaration>(cashFlowSeriesName)
+        declarations[cashFlowSeriesName] = list.copy(
+            cashFlows = list.cashFlows + value
         )
     }
 }
