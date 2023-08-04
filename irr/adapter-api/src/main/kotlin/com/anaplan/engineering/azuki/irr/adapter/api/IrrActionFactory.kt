@@ -6,7 +6,13 @@ import com.anaplan.engineering.azuki.core.system.UnsupportedAction
 import org.slf4j.LoggerFactory
 
 interface IrrActionFactory: ActionFactory {
+    val cashFlowSeries: CashFlowSeriesActionFactory
+    val irr: IrrValueActionFactory
+}
 
+interface IrrValueActionFactory {}
+
+interface CashFlowSeriesActionFactory {
     fun create(cashFlowSeries: String) = unsupportedAction()
     fun addToEnd(cashFlowSeriesName: String, cashFlow: Double) = unsupportedAction()
 }

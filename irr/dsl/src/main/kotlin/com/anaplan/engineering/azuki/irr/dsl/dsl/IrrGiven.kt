@@ -3,12 +3,13 @@ package com.anaplan.engineering.azuki.irr.dsl.dsl
 import com.anaplan.engineering.azuki.core.dsl.Given
 import com.anaplan.engineering.azuki.core.system.Action
 import com.anaplan.engineering.azuki.irr.adapter.api.IrrActionFactory
-import com.anaplan.engineering.azuki.irr.dsl.definition.cashFlowSeriesDefinition
-import javax.swing.text.html.parser.Entity
+import com.anaplan.engineering.azuki.irr.dsl.definition.CashFlowSeriesDefinition
+import com.anaplan.engineering.azuki.irr.dsl.definition.IrrDefinition
 
 class IrrGiven(private val actionFactory: IrrActionFactory):
     Given<IrrActionFactory>,
-    cashFlowSeriesDefinition
+    CashFlowSeriesDefinition,
+    IrrDefinition
 {
 
     private val actionList = mutableListOf<Action>()
@@ -16,8 +17,12 @@ class IrrGiven(private val actionFactory: IrrActionFactory):
     override fun actions(): List<Action> = actionList
 
     override fun cashFlowSeries(cashFlowSeriesName: String, vararg cashFlows: Double) {
-        actionList.add(actionFactory.create(cashFlowSeriesName))
-        actionList.addAll(cashFlows.map { actionFactory.addToEnd(cashFlowSeriesName, it)} )
+        actionList.add(actionFactory.cashFlowSeries.create(cashFlowSeriesName))
+        actionList.addAll(cashFlows.map { actionFactory.cashFlowSeries.addToEnd(cashFlowSeriesName, it)} )
+    }
+
+    override fun thereIsAnIrr(irrName: String, cashFlowSeriesName: String) {
+
     }
 
 }

@@ -9,7 +9,7 @@ import com.anaplan.engineering.azuki.irr.adapter.declaration.DeclarableAction
 import com.anaplan.engineering.azuki.irr.adapter.declaration.DeclarationBuilder
 import com.anaplan.engineering.azuki.irr.adapter.declaration.toDeclarableAction
 import com.anaplan.engineering.azuki.irr.adapter.irr.action.IRRAction
-import com.anaplan.engineering.azuki.irr.adapter.irr.action.IRRActionFactory
+import com.anaplan.engineering.azuki.irr.adapter.irr.action.IrrPoiActionFactory
 import com.anaplan.engineering.azuki.irr.adapter.irr.action.toIRRAction
 import com.anaplan.engineering.azuki.irr.adapter.irr.check.IrrPoiCheck
 import com.anaplan.engineering.azuki.irr.adapter.irr.check.IrrPoiCheckFactory
@@ -34,7 +34,7 @@ class IRRSystemFactory : SystemFactory<
         )
     }
 
-    override val actionFactory = IRRActionFactory()
+    override val actionFactory = IrrPoiActionFactory()
     override val checkFactory = IrrPoiCheckFactory()
     override val queryFactory = NoQueryFactory
     override val actionGeneratorFactory = NoActionGeneratorFactory

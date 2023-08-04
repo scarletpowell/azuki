@@ -7,7 +7,7 @@ import com.anaplan.engineering.azuki.irr.cashFlowA
 class NewIrr: IrrScenario() {
 
     @AnalysisScenario
-    fun newCashFlowSeriesIsOkay() {
+    fun newEmptyCashFlowSeriesIsOkay() {
         given {
             cashFlowSeries(cashFlowA)
         }
@@ -17,12 +17,23 @@ class NewIrr: IrrScenario() {
     }
 
     @AnalysisScenario
-    fun newIrr() {
+    fun newCashFlowSeriesIsOkay() {
         given {
-            cashFlowSeries(cashFlowA, 1.0)
+            cashFlowSeries(cashFlowA, 1.0, 2.0)
         }
         then {
             everythingIsOk()
         }
     }
+
+//    @AnalysisScenario
+//    fun newCashFlowSeries() {
+//        given {
+//            cashFlowSeries(cashFlowA, 1.0, 2.0)
+//            thereIsAnIRR(irrA, cashFlowA)
+//        }
+//        then {
+//            IrrHasValue()
+//        }
+//    }
 }
