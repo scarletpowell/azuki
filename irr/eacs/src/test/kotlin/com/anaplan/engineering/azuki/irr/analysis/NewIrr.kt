@@ -30,11 +30,11 @@ class NewIrr: IrrScenario() {
     @AnalysisScenario
     fun newCashFlowSeries() {
         given {
-            cashFlowSeries(cashFlowA, 1.0, 2.0)
+            cashFlowSeries(cashFlowA, -100000.0, 0.0, 130000.0)
             thereIsAnIrr(irrA, cashFlowA)
         }
         then {
-            everythingIsOk()
+            irrHasValue(irrA, 0.14017542509913788)
         }
     }
 }

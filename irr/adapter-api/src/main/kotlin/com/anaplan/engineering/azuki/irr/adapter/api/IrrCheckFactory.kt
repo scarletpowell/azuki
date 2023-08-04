@@ -5,5 +5,5 @@ import com.anaplan.engineering.azuki.core.system.CheckFactory
 import com.anaplan.engineering.azuki.core.system.UnsupportedCheck
 
 interface IrrCheckFactory: CheckFactory {
-    fun hasIrrValue(cashFlowSeriesName: String, result: Double): Check = UnsupportedCheck
+    fun irrHasValue(irrName: String, result: Double): Check = UnsupportedCheck
 }

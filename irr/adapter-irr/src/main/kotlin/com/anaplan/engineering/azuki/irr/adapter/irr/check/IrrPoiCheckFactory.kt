@@ -7,6 +7,7 @@ import com.anaplan.engineering.azuki.irr.adapter.irr.execution.ExecutionEnvironm
 
 class IrrPoiCheckFactory: IrrCheckFactory {
     override fun systemValid() = IrrSystemValidCheck
+    override fun irrHasValue(irrName: String, result: Double) = IrrHasValueCheck(irrName, result)
 }
 
 object IrrSystemValidCheck : IrrPoiCheck {
