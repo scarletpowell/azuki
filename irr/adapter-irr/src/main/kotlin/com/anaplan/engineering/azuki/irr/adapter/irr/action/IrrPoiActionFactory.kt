@@ -18,7 +18,7 @@ class PoiCashFlowSeriesActionFactory: CashFlowSeriesActionFactory {
 }
 
 class PoiIrrValueActionFactory: IrrValueActionFactory {
-
+    override fun create(irrName: String, cashFlowSeriesName: String): Action = CreateIrrAction(irrName, cashFlowSeriesName)
 }
 interface IRRAction : Action {
 

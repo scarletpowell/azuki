@@ -10,7 +10,9 @@ interface IrrActionFactory: ActionFactory {
     val irr: IrrValueActionFactory
 }
 
-interface IrrValueActionFactory {}
+interface IrrValueActionFactory {
+    fun create(irrName: String, cashFlowSeriesName: String) = unsupportedAction()
+}
 
 interface CashFlowSeriesActionFactory {
     fun create(cashFlowSeries: String) = unsupportedAction()

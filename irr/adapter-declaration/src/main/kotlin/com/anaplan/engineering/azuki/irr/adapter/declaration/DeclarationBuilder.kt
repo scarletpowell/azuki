@@ -34,6 +34,11 @@ class DeclarationBuilder(private val declarationActions: List<DeclarableAction>)
             cashFlows = list.cashFlows + value
         )
     }
+
+    fun declareIrr(irrName: String, cashFlowSeriesName: String){
+        checkForDuplicate(irrName)
+        declarations[irrName] = IrrDeclaration(irrName, cashFlowSeriesName, standalone = true)
+    }
 }
 
 class DuplicateDeclarationException(def: String) : IllegalArgumentException("$def is already defined")

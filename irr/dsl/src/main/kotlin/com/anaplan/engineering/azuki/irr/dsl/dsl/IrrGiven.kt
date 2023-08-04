@@ -22,7 +22,7 @@ class IrrGiven(private val actionFactory: IrrActionFactory):
     }
 
     override fun thereIsAnIrr(irrName: String, cashFlowSeriesName: String) {
-
+        actionList.add(actionFactory.irr.create(irrName, cashFlowSeriesName))
     }
 
 }
